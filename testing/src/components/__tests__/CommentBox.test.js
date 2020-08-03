@@ -16,27 +16,24 @@ it("has a text area and a button", () => {
   expect(wrappedComponent.find("button").length).toEqual(1);
 });
 
-it("has a textarea that can handle inputs successfully", () => {
-  wrappedComponent.find("textarea").simulate("change", {
-    target: { value: "New Comment" },
+describe("Text area behavior", () => {
+  beforeEach(() => {
+    wrappedComponent.find("textarea").simulate("change", {
+      target: { value: "New Comment" },
+    });
+
+    wrappedComponent.update();
   });
 
-  wrappedComponent.update();
-  expect(wrappedComponent.find("textarea").prop("value")).toEqual(
-    "New Comment"
-  );
-});
-
-it("text area is empty when form is submitted", () => {
-  wrappedComponent.find("textarea").simulate("change", {
-    target: { value: "Comment Placeholder" },
+  it("has a textarea that can handle inputs successfully", () => {
+    expect(wrappedComponent.find("textarea").prop("value")).toEqual(
+      "New Comment"
+    );
   });
-  wrappedComponent.update();
-  expect(wrappedComponent.find("textarea").prop("value")).toEqual(
-    "Comment Placeholder"
-  );
 
-  wrappedComponent.find("form").simulate("submit");
-  wrappedComponent.update();
-  expect(wrappedComponent.find("textarea").prop("value")).toEqual("");
+  it("text area is empty when form is submitted", () => {
+    wrappedComponent.find("form").simulate("submit");
+    wrappedComponent.update();
+    expect(wrappedComponent.find("textarea").prop("value")).toEqual("");
+  });
 });
