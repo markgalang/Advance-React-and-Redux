@@ -16,9 +16,9 @@ afterEach(() => {
   wrappedComponent.unmount();
 });
 
-it("has a text area and a button", () => {
+it("has a text area and 2 buttons", () => {
   expect(wrappedComponent.find("textarea").length).toEqual(1);
-  expect(wrappedComponent.find("button").length).toEqual(1);
+  expect(wrappedComponent.find("button").length).toEqual(2);
 });
 
 describe("Text area behavior", () => {
